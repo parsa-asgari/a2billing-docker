@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    ports:
+     - 80:80
+    env_file:
+      - ./.env
+    volumes:
+      - .:/a2billing
+    restart: unless-stopped
+    container_name: web
+    depends_on:
+      - db
+  sip-server:
+    image: andrius/asterisk:alpine-3.3-13.17.2
+    ports:
+     - 5060:5060
+    volumes:
+      - ./.docker/a2billing.conf:/etc/a2billing.conf
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    container_name: sip-server
+  db:
+    image: mysql:5.5.62
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    container_name: db
+    volumes:
+      - ./DataBase:/DataBase
+      - mysql_data:/var/lib/mysql
+  phpmyadmin:
+   container_name: phpmyadmin
+   image: phpmyadmin/phpmyadmin
+   ports:
+     - 8080:80
+   restart: "unless-stopped"
+   env_file:
+     - ./.env
+
+volumes:
+  mysql_data:

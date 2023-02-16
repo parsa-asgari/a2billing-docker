@@ -1,0 +1,2 @@
+mysql -u root --password=$MYSQL_ROOT_PASSWORD < DataBase/mysql-5.x/a2billing-createdb-user.sql
+sh DataBase/mysql-5.x/install-db.sh
