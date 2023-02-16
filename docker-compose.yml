@@ -8,7 +8,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - .:/a2billing
+      - ./a2billing:/a2billing
     restart: unless-stopped
     container_name: web
     depends_on:
