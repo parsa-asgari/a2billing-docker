@@ -57,4 +57,6 @@ GRANT ALL PRIVILEGES ON mya2billing.* TO 'a2billinguser'@'%' IDENTIFIED BY 'a2bi
 GRANT ALL PRIVILEGES ON mya2billing.* TO 'a2billinguser'@'localhost' IDENTIFIED BY 'a2billing' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON mya2billing.* TO 'a2billinguser'@'localhost.localdomain' IDENTIFIED BY 'a2billing' WITH GRANT OPTION;
 
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'phpmyadmin' IDENTIFIED BY 'root' WITH GRANT OPTION;
+
 create DATABASE if not exists `mya2billing`;
