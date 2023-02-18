@@ -5,7 +5,10 @@ echo "Bootstrapping the A2Billing stack"
 echo "--------------------------"
 echo ""
 
-echo "==> The working directory is"
+echo "Please do make sure that your working directory is inside a2billing-docker/"
+echo ""
+
+echo "==> The current working directory is"
 echo $(echo $PWD)
 echo ""
 
@@ -32,9 +35,10 @@ echo "==> 2 - Running the 'db' container and making sure MySQL is setup correctl
 echo "====> 2.1 - Running docker compose up -d db"
 echo ""
 docker compose up -d db
+echo ""
 echo "====> 2.1 - Running docker exec -it db bash /.docker/mysql_bootstrap.sh"
 echo ""
-echo "Waiting for the MySQL container to get ready..."
+echo "====> Waiting for the MySQL container to get ready..."
 sleep 20
 docker exec -it db bash /.docker/mysql_bootstrap.sh
 docker compose down
