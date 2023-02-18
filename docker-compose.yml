@@ -2,9 +2,6 @@ version: '3.9'
 
 services:
   web:
-    # build:
-    #   context: .
-    #   dockerfile: dockerfiles/web.Dockerfile
     image: driftwood64/a2billing-docker-web
     ports:
      - 80:80
@@ -16,11 +13,7 @@ services:
       - db
       - sip-server
   sip-server:
-    # image: andrius/asterisk:alpine-3.3-13.17.2
     image: driftwood64/a2billing-docker-sip-server
-    # build:
-    #   context: .
-    #   dockerfile: dockerfiles/asterisk.Dockerfile
     ports:
      - 5060:5060
     env_file:
@@ -28,9 +21,6 @@ services:
     restart: unless-stopped
     container_name: sip-server
   db:
-    # build:
-      # context: .
-      # dockerfile: dockerfiles/mysql.Dockerfile
     image: driftwood64/a2billing-docker-db
     env_file:
       - ./.env
