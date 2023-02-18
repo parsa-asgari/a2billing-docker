@@ -8,8 +8,8 @@ RUN docker-php-ext-enable mcrypt
 
 COPY ./a2billing /usr/local/src/a2billing
 COPY ./.docker/a2billing.conf /etc/a2billing.conf
-COPY ./.docker/mysql-install-db.sh /usr/local/src/a2billing/DataBase/mysql-5.x/install-db.sh
 COPY ./.docker/mysql_bootstrap.sh /mysql_bootstrap.sh
+COPY ./.docker/mysql-bootstrap-files/ /usr/local/src/a2billing/DataBase/mysql-5.x/
 
 WORKDIR /var/www/html/
 
