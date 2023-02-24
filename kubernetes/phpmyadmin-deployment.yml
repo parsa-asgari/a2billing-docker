@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: phpmyadmin
+  template:
+    metadata:
+      labels:
+        name: phpmyadmin
+    spec:
+      containers:
+        - name: phpmyadmin
+          image: phpmyadmin/phpmyadmin
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "Rd2MZ9FPugNYrDrvmz8gLF"
+            - name: PMA_HOST
+              value: "db"
+            - name: PMA_PORT
+              value: "3306"
+            - name: COMPOSER_ALLOW_SUPERUSER
+              value: "1"
+
+---
+# START Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  type: LoadBalancer
+  ports:
+    # Equivalent to 8080:80 in docker-compose
+    - port: 8080 #port that the service exposes
+      targetPort: 80 #port that the app is receiving requests from via the pod
+  selector:
+    name: phpmyadmin
+# END SERVICE
