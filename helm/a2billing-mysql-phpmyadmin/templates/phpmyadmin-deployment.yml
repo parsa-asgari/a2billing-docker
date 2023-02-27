@@ -1,22 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-customer
+  name: phpmyadmin
+  namespace: {{ .Values.namespace }}
   labels:
-    app: web-customer
+    app: phpmyadmin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: web-customer
+      name: phpmyadmin
   template:
     metadata:
       labels:
-        name: web-customer
+        name: phpmyadmin
     spec:
       containers:
-        - name: a2billing
-          image: driftwood64/a2billing-docker-web-customer:v1
+        - name: phpmyadmin
+          image: phpmyadmin/phpmyadmin
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -29,14 +30,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-customer
+  name: phpmyadmin
+  namespace: {{ .Values.namespace }}
   labels:
-    app: web-customer
+    app: phpmyadmin
 spec:
   type: LoadBalancer
   ports:
-    - port: 8091 #port that the service exposes
+    # Equivalent to 8080:80 in docker-compose
+    - port: 8080 #port that the service exposes
       targetPort: 80 #port that the app is receiving requests from via the pod
   selector:
-    name: web-customer
+    name: phpmyadmin
 # END SERVICE

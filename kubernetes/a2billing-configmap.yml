@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: a2billing-configmap
+  namespace: default
+data:
+  MYSQL_ROOT_PASSWORD: "Rd2MZ9FPugNYrDrvmz8gLF"
+  PMA_HOST: "db"
+  PMA_PORT: "3306"
+  COMPOSER_ALLOW_SUPERUSER: "1"

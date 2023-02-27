@@ -1,0 +1,7 @@
+ConfigMap:
+  mysql_root_password: Rd2MZ9FPugNYrDrvmz8gLF
+  phpmyadmin_host: db
+  phpmyadmin_port: 3306
+
+namespace: default
+PersistentStoragePath: /mysql-data

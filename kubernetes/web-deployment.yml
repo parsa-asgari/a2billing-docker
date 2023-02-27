@@ -20,15 +20,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: "Rd2MZ9FPugNYrDrvmz8gLF"
-            - name: PMA_HOST
-              value: "db"
-            - name: PMA_PORT
-              value: "3306"
-            - name: COMPOSER_ALLOW_SUPERUSER
-              value: "1"
+          envFrom:
+          - configMapRef:
+              name: a2billing-configmap
 
 ---
 # START Service
