@@ -1,24 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-phpmyadmin
+  name: ingress-web-admin
   namespace: {{ .Values.namespace }}
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^(/phpmyadmin)$ $1/ redirect;
 spec:
   rules:
   - host: cluster
     http: 
       paths:
-        - path: /phpmyadmin(/|$)(.*)
-        # - path: /phpmyadmin
+        - path: /admin(/|$)(.*)
           pathType: Prefix
           backend:
             service:
-              name: phpmyadmin
+              name: web-admin
               port:
-                # the TargetPort in Service
                 number: 80
