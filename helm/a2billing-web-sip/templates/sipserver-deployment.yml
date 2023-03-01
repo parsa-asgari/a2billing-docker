@@ -39,7 +39,7 @@ spec:
   ports:
     # Equivalent to 5060:80 in docker-compose
     - port: 5038 #port that the service exposes
-      targetPort: 80 #port that the app is receiving requests from via the pod
+      targetPort: 5060 #port that the app is receiving requests from via the pod
   selector:
     name: sipserver
 # END SERVICE

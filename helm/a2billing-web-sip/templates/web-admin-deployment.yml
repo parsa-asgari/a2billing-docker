@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: a2billing
-          image: driftwood64/a2billing-docker-web-admin:v1
+          image: driftwood64/a2billing-docker-web
           imagePullPolicy: Always
           ports:
             - containerPort: 80
