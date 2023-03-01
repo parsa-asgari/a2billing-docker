@@ -17,10 +17,11 @@ spec:
     spec:
       containers:
         - name: sipserver
-          image: driftwood64/a2billing-docker-sip-server:latest
+          image: driftwood64/a2billing-docker-sip-server:ubuntu_14_04
           imagePullPolicy: Always
           ports:
-            - containerPort: 5038
+            - containerPort: 5060
+              protocol: TCP
           envFrom:
           - configMapRef:
               name: a2billing-web-configmap
@@ -35,11 +36,13 @@ metadata:
   labels:
     app: sipserver
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     # Equivalent to 5060:80 in docker-compose
-    - port: 5038 #port that the service exposes
+    - name: tcp-port
+      port: 5060 #port that the service exposes
       targetPort: 5060 #port that the app is receiving requests from via the pod
+      protocol: TCP
   selector:
     name: sipserver
 # END SERVICE
