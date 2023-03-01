@@ -69,5 +69,5 @@ In order to bootstrap the cluster, it is advised to do the following steps:
   - Please do note that the script runs ChartMuseum inside a Screen session. 
 - The machine which the script was tested on had a slow HDD. Therefore, there is an option to choose your storage upon bootstrapping. Please choose the relevant storage type when prompted.
 - The rest of the bootstrapping script will populate the MySQL database with the mya2billing database which is needed by A2billing.
-- 
+
 
