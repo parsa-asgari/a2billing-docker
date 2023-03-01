@@ -1,0 +1,6 @@
+dependencies:
+- name: a2billing-mysql-phpmyadmin
+  repository: http://localhost:8080
+  version: 0.1.11
+digest: sha256:23d87f41962447a703b5b29d2b6134551277bec762ed08be2ac7658fe504881f
+generated: "2023-02-28T19:18:39.28586298+01:00"

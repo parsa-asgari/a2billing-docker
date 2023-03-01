@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   web:
-    image: driftwood64/a2billing-docker-web
+    image: driftwood64/a2billing-docker-web-admin:v2
     ports:
      - 80:80
     env_file:
@@ -15,7 +15,7 @@ services:
   sip-server:
     image: driftwood64/a2billing-docker-sip-server
     ports:
-     - 5060:5060
+     - 5038:5038
     env_file:
       - ./.env
     restart: unless-stopped

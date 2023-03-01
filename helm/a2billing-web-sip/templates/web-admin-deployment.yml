@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-admin
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: web-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: web-admin
+  template:
+    metadata:
+      labels:
+        name: web-admin
+    spec:
+      containers:
+        - name: a2billing
+          image: driftwood64/a2billing-docker-web
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+          - configMapRef:
+              name: a2billing-web-configmap
+
+---
+# START Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-admin
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: web-admin
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8090 #port that the service exposes
+      targetPort: 80 #port that the app is receiving requests from via the pod
+  selector:
+    name: web-admin
+# END SERVICE

@@ -1,0 +1,32 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mysql-pv
+  namespace: {{ .Values.namespace }}
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 100M # total capacity for this persistent volume
+  accessModes:
+    - ReadWriteOnce
+  hostPath: # where pesistent volume is created on the kubernetes node (needs to be /data for minikube)
+    # path: "/data"
+    path: "{{ .Values.PersistentStoragePath }}"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim #claim a portion of persistent volume
+metadata:
+  name: mysql-pv-claim
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: mysql
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce # mount as read-write by a single node
+  resources:
+    requests:
+      storage: 100M # storage capacity consumed from the persistent volume

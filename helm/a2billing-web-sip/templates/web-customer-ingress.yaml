@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-web-customer
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /customer/$2
+    nginx.ingress.kubernetes.io/app-root: /customer/
+spec:
+  rules:
+  - host: cluster
+    http: 
+      paths:
+        - path: /customer(/|$)(.*)
+        # - path: /customer(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: web-customer
+              port:
+                number: 80

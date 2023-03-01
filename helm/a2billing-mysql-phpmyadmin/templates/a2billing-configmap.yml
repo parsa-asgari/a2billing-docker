@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: a2billing-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  MYSQL_ROOT_PASSWORD: "{{ .Values.ConfigMap.mysql_root_password }}"
+  PMA_HOST: "{{ .Values.ConfigMap.phpmyadmin_host }}"
+  PMA_PORT: "{{ .Values.ConfigMap.phpmyadmin_port }}"
+  PMA_ABSOLUTE_URI: "{{ .Values.ConfigMap.phpmyadmin_absolute_url }}"
+  COMPOSER_ALLOW_SUPERUSER: "1"

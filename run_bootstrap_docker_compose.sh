@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "**************************"
-echo "Bootstrapping the A2Billing stack"
+echo "Bootstrapping the A2Billing stack in Docker-Compose"
 echo "--------------------------"
 echo ""
 

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-web-admin
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /admin/$2
+    nginx.ingress.kubernetes.io/app-root: /admin/
+spec:
+  rules:
+  - host: cluster
+    http: 
+      paths:
+        - path: /admin(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: web-admin
+              port:
+                number: 80

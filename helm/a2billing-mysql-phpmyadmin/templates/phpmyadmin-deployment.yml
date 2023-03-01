@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: phpmyadmin
+  template:
+    metadata:
+      labels:
+        name: phpmyadmin
+    spec:
+      containers:
+        - name: phpmyadmin
+          image: phpmyadmin/phpmyadmin
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+          - configMapRef:
+              name: a2billing-configmap
+
+---
+# START Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: phpmyadmin
+spec:
+  type: LoadBalancer
+  ports:
+    # Equivalent to 8080:80 in docker-compose
+    - port: 8080 #port that the service exposes
+      targetPort: 80 #port that the app is receiving requests from via the pod
+  selector:
+    name: phpmyadmin
+# END SERVICE

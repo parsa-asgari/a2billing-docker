@@ -1,0 +1,8 @@
+ConfigMap:
+  mysql_root_password: Rd2MZ9FPugNYrDrvmz8gLF
+  phpmyadmin_host: db
+  phpmyadmin_port: 3306
+  phpmyadmin_absolute_url: http://213.202.217.28/phpmyadmin/
+
+namespace: default
+PersistentStoragePath: /mysql-data

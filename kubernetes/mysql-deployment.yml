@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mysql
+  template:
+    metadata:
+      labels:
+        name: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: driftwood64/a2billing-docker-db:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3306
+          envFrom:
+          - configMapRef:
+              name: a2billing-configmap
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-volume-mount
+      volumes:
+        - name: mysql-volume-mount
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
+
+---
+# START Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    app: db
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3306
+  selector:
+    name: mysql
+# END SERVICE
