@@ -61,6 +61,11 @@ In order to bootstrap the cluster, it is advised to do the following steps:
    ```bash
    bash run_bootstrap_minikube.sh
    ```
+4. Stop the cluster
+
+   ```bash
+   bash stop_minikube.sh
+   ```
 
 ### Notes:
 
